@@ -10,7 +10,7 @@
 
 package generators;
 
-public class FibGenerator implements IGenerator {
+public class FibGenerator extends Generator {
     private int first = 1;
     private int second = 1;
     private int current;
