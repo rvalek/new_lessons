@@ -1,11 +1,8 @@
 package generators;
 
-public class PrimeGenerator implements IGenerator {
-    private int baseValue = 2;
-    private int nextStartingPoint = baseValue;
-
+public class PrimeGenerator extends Generator {
     public PrimeGenerator() {
-
+        init(2);
     }
 
     public int getBaseValue() {
@@ -13,10 +10,15 @@ public class PrimeGenerator implements IGenerator {
     }
 
     public int next() {
-        for (int i = nextStartingPoint;; i += 1) {
+        // if this member of our sequence was already generated
+        // return it from array
+        // else
+        // generate next value from current one
+        for (int i = currentValue + 1;; i += 1) {
             if (isPrime(i)) {
-                nextStartingPoint = i + 1;
+                currentValue = i;
                 return i;
+                // also add it to array
             }
         }
     }
@@ -32,16 +34,3 @@ public class PrimeGenerator implements IGenerator {
     }
 
 }
-
-// class Client {
-//     public static void main(String[] args) {
-        // PrimeNumbers o = new PrimeNumbers();
-//         o.nextPrime();
-//         // System.out.println
-
-//     }
-
-//     public Number timesTwo(Number n) {
-
-//     }
-// }
