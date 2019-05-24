@@ -5,7 +5,7 @@ public class PrimeGenerator extends Generator {
         super(2);
     }
 
-    public int generateNextMember() {
+    protected int generateNextMember() {
         for (int i = getCurrentMember() + 1;; i += 1) {
             if (isPrime(i)) {
                 return i;
