@@ -1,35 +1,15 @@
-// package generators;
-
-// public class FibGenerator implements IGenerator {
-//     public FibGenerator() { }
-
-//     public int next() {
-//         return 0;
-//     }
-// }
-
 package generators;
 
 public class FibGenerator extends Generator {
-    private int first = 1;
-    private int second = 1;
-    private int current;
-
     public FibGenerator() {
+        super(0);
     }
 
-    public int getFirst() {
-        return first;
-    }
-
-    public int getSecond() {
-        return second;
-    }
-
-    public int next() {
-        current = first + second;
-        first = second;
-        second = current;
-        return current;
+    protected int generateNextMember() {
+        if (currentMemberIndex == 1) {
+            return 1;
+        } else {
+            return generatedValues.get(currentMemberIndex - 1) + generatedValues.get(currentMemberIndex - 2);
+        }
     }
 }
