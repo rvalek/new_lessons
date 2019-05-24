@@ -3,12 +3,11 @@ package generators;
 import java.util.ArrayList;
 
 public abstract class Generator {
-    protected int currentMemberIndex;
+    protected int currentMemberIndex = 0;
     protected ArrayList<Integer> generatedValues = new ArrayList<>();
 
     protected Generator(int _baseValue) {
         generatedValues.add(_baseValue);
-        currentMemberIndex = 0;
     }
 
     public int getBaseMember() {
@@ -24,13 +23,13 @@ public abstract class Generator {
     }
 
     public int next() {
-        currentMemberIndex += 1;
-
         if (generatedAlready()) {
+            currentMemberIndex += 1;
             return getCurrentMember();
         } else {
             int nextValue = generateNextMember();
             generatedValues.add(nextValue);
+            currentMemberIndex += 1;
             return nextValue;
         }
 
