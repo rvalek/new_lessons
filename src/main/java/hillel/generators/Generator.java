@@ -1,4 +1,4 @@
-package generators;
+package hillel.generators;
 
 import java.util.ArrayList;
 

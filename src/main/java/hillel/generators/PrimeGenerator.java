@@ -1,10 +1,11 @@
-package generators;
+package hillel.generators;
 
 public class PrimeGenerator extends Generator {
     public PrimeGenerator() {
         super(2);
     }
 
+    @Override
     protected int generateNextMember() {
         for (int i = getCurrentMember() + 1;; i += 1) {
             if (isPrime(i)) {
