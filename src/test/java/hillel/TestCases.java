@@ -1,38 +1,43 @@
 package hillel;
 
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import hillel.generators.FibGenerator;
 import hillel.generators.Generator;
-import hillel.generators.PrimeGenerator;
 
 public class TestCases {
+    // static Generator g;
 
-    @Test(description = "Check first 3 memebers produced by a prime generator")
-    public static void test1() throws Exception {
-        PrimeGenerator g = new PrimeGenerator();
-        int[] primes = { 2, 3, 5 };
+    // @BeforeMethod
+    // public static void instantiateGenerator2() {
+    //     g = new PrimeGenerator();
+    // }
 
-        Assert.assertTrue(firstNMembers(g, primes), "First three members produced by PrimeGenerator do not match the actual prime numbers");
+    @DataProvider
+    public static Object[][] generatorsAndNumbers() {
+        return TestData.generatorsWithNumbers;
     }
 
-    @Test(description = "Check first 3 memebers produced by a fib generator")
-    public static void test2() throws Exception {
-        FibGenerator g = new FibGenerator();
-        int[] fibs = { 0, 1, 1 };
-
-        Assert.assertTrue(firstNMembers(g, fibs), "First three members produced by FibGenerator do not match the actual fib numbers");
+    @DataProvider
+    public static Object[][] generators() {
+        return TestData.generators;
     }
 
-    public static boolean firstNMembers(Generator g, int[] expectedValues) {
-        for (int v : expectedValues) {
-            if (g.next() != v) {
-                return false;
-            }
-        }
-
-        return true;
+    @Test(dataProvider = "generatorsAndNumbers", description = "Check first 3 memebers produced by a prime generator")
+    public static void test1(Generator gen, int[] expectedMembers) {
+        System.out.println("t1");
+        Assert.assertTrue(Utils.firstNMembers(gen, expectedMembers),
+                "First three members produced by PrimeGenerator do not match the actual prime numbers");
     }
 
+    @Test(dataProvider = "generators", description = "Test for the reset() method of a generator")
+    public static void test3(Generator gen) {
+        System.out.println("t2");
+        int firstTime = gen.next();
+        gen.reset();
+        int secondTime = gen.next();
+
+        Assert.assertEquals(firstTime, secondTime, "Values generated before and after reset do not match");
+    }
 }
