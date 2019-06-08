@@ -1,6 +1,4 @@
-package hillel;
-
-import hillel.generators.Generator;
+package generators;
 
 public class Utils {
     public static boolean firstNMembers(Generator g, int[] expectedValues) {

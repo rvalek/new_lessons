@@ -1,7 +1,4 @@
-package hillel;
-
-import hillel.generators.FibGenerator;
-import hillel.generators.PrimeGenerator;
+package generators;
 
 public interface TestData {
     public static Object[][] generators = new Object[][] {

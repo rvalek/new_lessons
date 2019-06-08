@@ -1,4 +1,4 @@
-package hillel.generators;
+package generators;
 
 public class PrimeGenerator extends Generator {
     public PrimeGenerator() {

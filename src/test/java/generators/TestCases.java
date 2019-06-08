@@ -1,10 +1,8 @@
-package hillel;
+package generators;
 
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
-import hillel.generators.Generator;
 
 public class TestCases {
     // static Generator g;

@@ -1,4 +1,4 @@
-package hillel.generators;
+package generators;
 
 public class FibGenerator extends Generator {
     public FibGenerator() {
