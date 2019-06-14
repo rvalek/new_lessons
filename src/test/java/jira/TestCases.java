@@ -6,11 +6,11 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 public class TestCases {
-  static WebDriver browser;
+  private static WebDriver browser;
+  private static String username = "autorob";
 
   @BeforeTest
   public static void openBrowser() {
@@ -23,19 +23,17 @@ public class TestCases {
     browser.quit();
   }
 
-  @Parameters({ "autorob", "badpass" })
   @Test(priority = -1)
-  public static void invalidLogin(String username, String password) {
-    login(username, password);
+  public static void invalidLogin() {
+    login(username, "forautotests");
 
     Assert.assertTrue(browser.findElements(By.cssSelector("div.aui-message-error")).size() > 0);
     Assert.assertTrue(browser.findElements(By.cssSelector("li#user-options")).size() == 0);
   }
 
-  @Parameters({ "autorob", "badpass" })
   @Test()
   public static void validLogin(String username, String password) {
-    login(username, password);
+    login(username, "wrongpass");
 
     Assert.assertTrue(browser.findElements(By.cssSelector("li#user-options")).size() > 0);
     Assert.assertTrue(browser.findElement(By.cssSelector("a#header-details-user-fullname"))
