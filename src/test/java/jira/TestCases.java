@@ -1,7 +1,10 @@
 package jira;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -11,6 +14,9 @@ import org.testng.annotations.Test;
 public class TestCases {
   private static WebDriver browser;
   private static String username = "autorob";
+
+  private static String newIssueSummary = "Sanity Automation Robert " + Utils.timeStamp();
+  private static String newIssuePath;
 
   @BeforeTest
   public static void openBrowser() {
@@ -42,18 +48,48 @@ public class TestCases {
 
   @Test
   public static void createIssue() {
+    browser.findElement(By.cssSelector("a#create_link")).click();
+    Utils.findAndFill(browser, By.cssSelector("input#project-field"), "General QA Robert (GQR)\n");
 
+    try {
+      Thread.sleep(1500);
+    } catch (InterruptedException e) {
+    }
+
+    Utils.findAndFill(browser, By.cssSelector("input#summary"), newIssueSummary + "\n");
+
+    try {
+      Thread.sleep(1000);
+    } catch (InterruptedException e) {
+    }
+
+    List<WebElement> linkNewIssues = browser.findElements(By.cssSelector("a.issue-created-key"));
+
+    Assert.assertTrue(linkNewIssues.size() != 0);
+
+    newIssuePath = linkNewIssues.get(0).getAttribute("href");
   }
 
   @Test
   public static void viewIssue() {
-
+    browser.get(newIssuePath);
+    Assert.assertTrue(browser.getTitle().contains(newIssueSummary));
   }
 
-  @Test
-  public static void addUser() {
+  // @Test
+  // public static void addUser() {
 
-  }
+  // }
+
+  // @Test
+  // public static void uploadAttachment() {
+
+  // }
+
+  // @Test
+  // public static void downloadAttachment() {
+
+  // }
 
   private static void login(String username, String password) {
     Utils.findAndFill(browser, By.cssSelector("input[name='os_username']"), username);
