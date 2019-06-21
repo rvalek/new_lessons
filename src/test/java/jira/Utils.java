@@ -18,6 +18,6 @@ public class Utils {
 
   public static String timeStamp() {
     return new SimpleDateFormat("dd/MM/yy HH:mm").format(new Date());
-}
+  }
 
 }
