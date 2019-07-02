@@ -1,5 +1,6 @@
 package jira;
 
+import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -10,11 +11,11 @@ public class TestCases extends TestBase {
 
   @BeforeClass
   public void initPages() {
-    loginPage = new LoginPage(browser);
-    issuePage = new IssuePage(browser);
+    loginPage = PageFactory.initElements(browser, LoginPage.class);
+    issuePage = PageFactory.initElements(browser, IssuePage.class);
   }
 
-  @Test(priority = -1)
+  @Test(priority = -1, groups = { "sanity", "logins" })
   public void invalidLogin() {
     loginPage.invalidLogin();
 
@@ -33,12 +34,12 @@ public class TestCases extends TestBase {
     Assert.assertTrue(issuePage.hasNewIssueLinks());
   }
 
-  @Test(dependsOnMethods = { "createIssue" })
+  @Test(dependsOnMethods = { "createIssue" }, groups = { "Issues" })
   public void viewIssue() {
     issuePage.viewIssue();
   }
 
-  @Test(dependsOnMethods = { "viewIssue" })
+  @Test(dependsOnMethods = { "viewIssue" }, groups = { "Issues.Attachments" })
   public void uploadAttachment() {
     issuePage.uploadAttachment();
   }

@@ -1,9 +1,0 @@
-<test name="All unit tests">
-  <classes>
-    <class name="hillel.TestCases">
-      <methods>
-        <include name="test3" />
-      </methods>
-    </class>
-  </classes>
-</test>

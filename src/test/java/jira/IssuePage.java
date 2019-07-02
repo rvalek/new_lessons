@@ -8,34 +8,42 @@ import org.openqa.selenium.InvalidElementStateException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.testng.Assert;
 
-public class IssuePage {
-  protected WebDriver browser;
+public class IssuePage extends PageBase {
   private String newIssuePath;
+
+  @FindBy(css = "a.attachment-title")
+  private WebElement linkAttachment;
+  @FindBy(css = "a#create_link")
+  private WebElement buttonCreate;
+  @FindBy(css = "a.issue-created-key")
+  private WebElement linkNewIssue;
+  @FindBy(css = "a.issue-created-key")
+  private List<WebElement> linksNewIssue;
+
 
   private static String linkCss = "a.attachment-title";
 
   public IssuePage(WebDriver browser) {
-    this.browser = browser;
+    super(browser);
   }
 
   public void createIssue() {
-    browser.findElement(By.cssSelector("a#create_link")).click();
-    Utils.findAndFill(browser, By.cssSelector("input#project-field"), "General QA Robert (GQR)\n");
+    buttonCreate.click();
+    utils.findAndFill(By.cssSelector("input#project-field"), Vars.projectName + "\n");
 
     new FluentWait<>(browser).withTimeout(Duration.ofSeconds(5)).pollingEvery(Duration.ofMillis(500))
         .ignoring(InvalidElementStateException.class)
-        .until(browser -> Utils.findAndFill(browser, By.cssSelector("input#summary"), Vars.newIssueSummary)).submit();
+        .until(browser -> utils.findAndFill(By.cssSelector("input#summary"), Vars.newIssueSummary)).submit();
 
-    newIssuePath = browser.findElement(By.cssSelector("a.issue-created-key")).getAttribute("href");
+    newIssuePath = newIssueLink.getAttribute("href");
   }
 
   public boolean hasNewIssueLinks() {
-    List<WebElement> linkNewIssues = browser.findElements(By.cssSelector("a.issue-created-key"));
-
-    return linkNewIssues.size() != 0;
+    return newIssueLinks.size() != 0;
   }
 
   public void viewIssue() {
@@ -49,13 +57,13 @@ public class IssuePage {
 
     WebElement linkAttachment = new FluentWait<>(browser).withTimeout(Duration.ofSeconds(10))
         .pollingEvery(Duration.ofSeconds(2)).ignoring(NoSuchElementException.class)
-        .until(browser -> browser.findElement(By.cssSelector("a.attachment-title")));
+        .until(browser -> linkAttachment);
 
     Assert.assertEquals(Vars.attachmentFileName, linkAttachment.getText());
   }
 
   public void downloadAttachment() {
-    browser.findElement(By.cssSelector("a.attachment-title")).click();
+    linkAttachment.click();
 
     // add wait
     // add assert

@@ -8,7 +8,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class Utils {
-  public static WebElement findAndFill(WebDriver browser, By locator, String text) {
+  private WebDriver browser;
+
+  public Utils(WebDriver browser) {
+    this.browser = browser;
+  }
+
+  public WebElement findAndFill(By locator, String text) {
     WebElement e = browser.findElement(locator);
     e.clear();
     e.sendKeys(text);
