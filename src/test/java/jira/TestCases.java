@@ -13,9 +13,12 @@ public class TestCases extends TestBase {
   public void initPages() {
     loginPage = PageFactory.initElements(browser, LoginPage.class);
     issuePage = PageFactory.initElements(browser, IssuePage.class);
+
+    browser.get("https://jira.hillel.it/secure/Dashboard.jspa");
   }
 
-  @Test(priority = -1, groups = { "sanity", "logins" })
+  // @TestRailId(1)
+  @Test(priority = -1, groups = { "sanity", "logins" }, description = "1.")
   public void invalidLogin() {
     loginPage.invalidLogin();
 
