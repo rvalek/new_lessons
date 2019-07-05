@@ -24,9 +24,6 @@ public class IssuePage extends PageBase {
   @FindBy(css = "a.issue-created-key")
   private List<WebElement> linksNewIssue;
 
-
-  private static String linkCss = "a.attachment-title";
-
   public IssuePage(WebDriver browser) {
     super(browser);
   }
@@ -39,11 +36,11 @@ public class IssuePage extends PageBase {
         .ignoring(InvalidElementStateException.class)
         .until(browser -> utils.findAndFill(By.cssSelector("input#summary"), Vars.newIssueSummary)).submit();
 
-    newIssuePath = newIssueLink.getAttribute("href");
+    newIssuePath = linkNewIssue.getAttribute("href");
   }
 
   public boolean hasNewIssueLinks() {
-    return newIssueLinks.size() != 0;
+    return linksNewIssue.size() != 0;
   }
 
   public void viewIssue() {
@@ -56,8 +53,7 @@ public class IssuePage extends PageBase {
         .sendKeys(Vars.attachmentFileLocation + Vars.attachmentFileName);
 
     WebElement linkAttachment = new FluentWait<>(browser).withTimeout(Duration.ofSeconds(10))
-        .pollingEvery(Duration.ofSeconds(2)).ignoring(NoSuchElementException.class)
-        .until(browser -> linkAttachment);
+        .pollingEvery(Duration.ofSeconds(2)).ignoring(NoSuchElementException.class).until(browser -> linkAttachment);
 
     Assert.assertEquals(Vars.attachmentFileName, linkAttachment.getText());
   }
