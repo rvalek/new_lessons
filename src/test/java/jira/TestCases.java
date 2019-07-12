@@ -5,6 +5,9 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import listeners.Retry;
+import testrail.TRProps;
+
 public class TestCases extends TestBase {
   private LoginPage loginPage;
   private IssuePage issuePage;
@@ -17,8 +20,8 @@ public class TestCases extends TestBase {
     browser.get("https://jira.hillel.it/secure/Dashboard.jspa");
   }
 
-  // @TestRailId(1)
-  @Test(priority = -1, groups = { "sanity", "logins" }, description = "1.")
+  @TRProps(caseId = 1)
+  @Test(priority = -1, groups = { "sanity", "logins" }, retryAnalyzer = Retry.class)
   public void invalidLogin() {
     loginPage.invalidLogin();
 
