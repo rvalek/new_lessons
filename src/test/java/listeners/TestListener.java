@@ -12,7 +12,8 @@ public class TestListener implements ITestListener {
 
   @Override
   public void onTestStart(ITestResult result) {
-
+    // Removes extra skipped results when failed test is retried
+    result.getTestContext().getSkippedTests().removeResult(result.getMethod());
   }
 
   @Override

@@ -5,6 +5,9 @@ public interface Vars {
   static String newIssueSummary = "Sanity Automation Robert " + Utils.timeStamp();
   static String attachmentFileLocation = "/path/to/folder/";
   static String attachmentFileName = "file.jpg";
+
+  // static ArrayList fileNames =
+
   static String projectName = "General QA Robert (GQR)";
 
   static String testRailUrl = "https://autorob.testrail.io/";
