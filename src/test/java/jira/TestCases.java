@@ -12,7 +12,7 @@ public class TestCases extends TestBase {
   private LoginPage loginPage;
   private IssuePage issuePage;
 
-  @BeforeClass
+  @BeforeClass(alwaysRun = true)
   public void initPages() {
     loginPage = PageFactory.initElements(browser, LoginPage.class);
     issuePage = PageFactory.initElements(browser, IssuePage.class);

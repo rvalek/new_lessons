@@ -14,7 +14,7 @@ public class TestBase {
   protected WebDriver browser;
 
   @Parameters({ "browserType" })
-  @BeforeTest
+  @BeforeTest(alwaysRun = true)
   public void openBrowser(String browserType) throws Exception {
 
     ChromeOptions options = new ChromeOptions();
