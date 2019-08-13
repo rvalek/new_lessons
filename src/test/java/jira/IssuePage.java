@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.InvalidElementStateException;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -52,8 +51,8 @@ public class IssuePage extends PageBase {
     browser.findElement(By.cssSelector("input.issue-drop-zone__file"))
         .sendKeys(Vars.attachmentFileLocation + Vars.attachmentFileName);
 
-    WebElement linkAttachment = new FluentWait<>(browser).withTimeout(Duration.ofSeconds(10))
-        .pollingEvery(Duration.ofSeconds(2)).ignoring(NoSuchElementException.class).until(browser -> linkAttachment);
+    // WebElement linkAttachment = new FluentWait<>(browser).withTimeout(Duration.ofSeconds(10))
+    //     .pollingEvery(Duration.ofSeconds(2)).ignoring(NoSuchElementException.class).until(browser -> linkAttachment);
 
     Assert.assertEquals(Vars.attachmentFileName, linkAttachment.getText());
   }
