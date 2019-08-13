@@ -35,20 +35,23 @@ public class TestBase {
       break;
     }
 
+    System.out.println("Browser started.")
+
     browser.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
   }
 
   // @BeforeSuite(groups = "Files")
   // public void prepareTestFiles() {
-  //   File testFile = new File(Vars.attachmentFileLocation + Vars.attachmentFileName);
-  //   if (!(testFile.exists())) {
-  //     try {
-  //       testFile.createNewFile();
-  //     } catch (IOException e) {
-  //       System.out.println("Couldn't create a test file!");
-  //       e.printStackTrace();
-  //     }
-  //   }
+  // File testFile = new File(Vars.attachmentFileLocation +
+  // Vars.attachmentFileName);
+  // if (!(testFile.exists())) {
+  // try {
+  // testFile.createNewFile();
+  // } catch (IOException e) {
+  // System.out.println("Couldn't create a test file!");
+  // e.printStackTrace();
+  // }
+  // }
 
   // }
 
