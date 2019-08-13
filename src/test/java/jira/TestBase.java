@@ -35,7 +35,7 @@ public class TestBase {
       break;
     }
 
-    System.out.println("Browser started.")
+    System.out.println("Browser started.");
 
     browser.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
   }
