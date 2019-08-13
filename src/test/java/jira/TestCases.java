@@ -21,7 +21,7 @@ public class TestCases extends TestBase {
   }
 
   @TRProps(caseId = 1)
-  @Test(priority = -1, groups = { "sanity", "logins" }, retryAnalyzer = Retry.class)
+  @Test(priority = -1, groups = { "Sanity", "logins" }, retryAnalyzer = Retry.class)
   public void invalidLogin() {
     loginPage.invalidLogin();
 
