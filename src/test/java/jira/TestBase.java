@@ -29,13 +29,14 @@ public class TestBase {
     switch (browserType) {
     case "chrome":
       browser = new ChromeDriver(options);
+      System.out.println("Chrome started.");
       break;
     case "firefox":
       browser = new FirefoxDriver();
+      System.out.println("FF started.");
       break;
     }
 
-    System.out.println("Browser started.");
 
     browser.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
   }
