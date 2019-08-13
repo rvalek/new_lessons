@@ -5,6 +5,7 @@
         <listener class-name="listeners.TestListener"/>
     </listeners>
     <test name="Sanity" verbose="1" group-by-instances="true">
+        <parameter name="browserType" value="chrome"/>
         <!-- <parameter name="testRailProjectId" value="1"/>
         <parameter name="testRailRunPrefix" value="Jira"/> -->
         <groups>
