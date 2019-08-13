@@ -17,6 +17,8 @@ public class TestBase {
   @BeforeTest(alwaysRun = true)
   public void openBrowser(String browserType) throws Exception {
 
+    System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+
     ChromeOptions options = new ChromeOptions();
     // options.addArguments("--headless");
     options.addArguments("--incognito");
